@@ -10,7 +10,7 @@ Kubernetes Deployment Framework
    :maxdepth: 2
    :caption: Contents:
 
-   index
+   Readme
 
 Overview
 -----------------------------------------------------------
