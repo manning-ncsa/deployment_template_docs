@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubernetes Deployment Framework &mdash; Kubernetes Deployment Framework  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Kubernetes Deployment Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kubernetes Deployment Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#carvel">Carvel Kubernetes Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secrets">Secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app-deployment">App Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Kubernetes Deployment Framework</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Kubernetes Deployment Framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubernetes-deployment-framework">
+<h1>Kubernetes Deployment Framework<a class="headerlink" href="#kubernetes-deployment-framework" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kubernetes Deployment Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#carvel">Carvel Kubernetes Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secrets">Secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app-deployment">App Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This template repository contains the framework that allows you to deploy services on development and production Kubernetes (k8s) clusters, following the <a class="reference external" href="https://www.gitops.tech">GitOps</a> philosophy to ensure reproducible cluster states by using version-controlled deployment.</p>
+<p>The fundamental unit of our organization scheme is an individual application, or <em>app</em>. The idea is that k8s resources (Ingresses, Deployments, Secrets, Services, etc) are typically deployed to support a specific app. We want the creation, update and deletion of these app resources to be as simple as possible. To that end, we are using the <a class="reference external" href="https://carvel.dev/">Carvel Kubernetes tools</a> as the basis of our workflow.</p>
+<p>The repo is organized into several folder trees that follow a specific hierarchy:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/apps/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/config/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/infrastructure/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/private/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/scripts/</span></code></li>
+</ul>
+<p>The foundational configuration of the cluster, including things like namespace definitions and TLS certificates, is essentially app-independent and must be deployed manually from the config files in <code class="docutils literal notranslate"><span class="pre">/infrastructure</span></code>.</p>
+<p>The configuration of individual apps is constructed hierarchically, starting with the parameter values defined in the <code class="docutils literal notranslate"><span class="pre">/config</span></code> tree.</p>
+<ol class="arabic simple">
+<li>The global default values are set first, followed by</li>
+<li>cluster-specific, cluster-wide values, followed by</li>
+<li>cluster-specific, namespace-specific values, followed by</li>
+<li>the values specified in the app-specific folder in the <code class="docutils literal notranslate"><span class="pre">/apps</span></code> tree.</li>
+</ol>
+</div>
+<div class="section" id="carvel">
+<span id="id1"></span><h2>Carvel Kubernetes Tools<a class="headerlink" href="#carvel" title="Permalink to this headline">¶</a></h2>
+<p>The software utilities powering this framework are part of the Carvel suite (formerly Kubernetes Tools, or k14s). According to the project page:</p>
+<blockquote>
+<div>Carvel provides a set of reliable, single-purpose, composable tools that aid in your application building, configuration, and deployment to Kubernetes.</div></blockquote>
+<p>These tools include <code class="docutils literal notranslate"><span class="pre">ytt</span></code> for configuration templating, <code class="docutils literal notranslate"><span class="pre">kbld</span></code> for image building and pushing, and <code class="docutils literal notranslate"><span class="pre">kapp</span></code> for creating and updating k8s resources defined together as an application. These tools assume <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> is installed.</p>
+</div>
+<div class="section" id="secrets">
+<h2>Secrets<a class="headerlink" href="#secrets" title="Permalink to this headline">¶</a></h2>
+<p>Sensitive information, including Kubernetes Secret resources, should not be stored directly in this deployment repo, but should instead be stored in a separate, more secure repo that is cloned in the <code class="docutils literal notranslate"><span class="pre">/private</span></code> location. Resources defined in this private git submodule are symbolically linked where needed.</p>
+</div>
+<div class="section" id="infrastructure">
+<h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h2>
+<p>All updates to cluster configuration or infrastructure k8s resources should be captured in the <code class="docutils literal notranslate"><span class="pre">/infrastructure</span></code> tree. When necessary, scripts to ensure reproducibility of the cluster state should be added to the <code class="docutils literal notranslate"><span class="pre">/scripts</span></code> folder <strong>along with the corresponding documentation</strong>.</p>
+<p>For example, the image registry credentials needed by the deployments is stored in <code class="docutils literal notranslate"><span class="pre">/private/infrastructure/common/registry-auth.yaml</span></code> and symlinked to <code class="docutils literal notranslate"><span class="pre">/infrastructure/common/registry-auth.yaml</span></code>. It must be deployed manually to each namespace where there is an app deployed that relies on those credentials.</p>
+</div>
+<div class="section" id="app-deployment">
+<h2>App Deployment<a class="headerlink" href="#app-deployment" title="Permalink to this headline">¶</a></h2>
+<p>App deployment is best explained with an example. Let’s define and deploy an app called <code class="docutils literal notranslate"><span class="pre">website</span></code>.</p>
+<p>First we create the app folder <code class="docutils literal notranslate"><span class="pre">/apps/website</span></code>. The next level of the app folder hierarchy must have at least the folder <code class="docutils literal notranslate"><span class="pre">common</span></code>, and may also contain <code class="docutils literal notranslate"><span class="pre">cluster-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster-prod</span></code>, if there are cluster-specific configuration settings for the app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span>
+<span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span>
+<span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span>
+<span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">prod</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">common</span></code> folder must contain a <code class="docutils literal notranslate"><span class="pre">config</span></code> folder that defines the k8s resources to be created. Any YAML file in this folder will be included as part of the deployed app. This folder typically contains at least two files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
+<span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">values</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>but also frequently includes a symlink to a <cite>secrets.yaml</cite> file residing in the separate <code class="docutils literal notranslate"><span class="pre">/private</span></code> git submodule:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">secrets</span><span class="o">.</span><span class="n">yaml</span> <span class="o">-&gt;</span> <span class="o">../../../../</span><span class="n">private</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">secrets</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">values.yaml</span></code> file is a special file used by the <code class="docutils literal notranslate"><span class="pre">ytt</span></code> utility to render the templated configuration files. It may contain definitions such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#@data/values</span>
+<span class="o">---</span>
+<span class="n">app_name</span><span class="p">:</span> <span class="n">website</span>
+</pre></div>
+</div>
+<p>that allow the k8s resource definitions in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#@ load(&quot;@ytt:data&quot;, &quot;data&quot;)</span>
+<span class="c1">#@yaml/text-templated-strings</span>
+<span class="o">---</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="o">/</span><span class="n">v1</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="o">@=</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">app_name</span> <span class="o">@</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to render as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="n">kind</span><span class="p">:</span> <span class="n">Deployment</span>
+<span class="n">apiVersion</span><span class="p">:</span> <span class="n">apps</span><span class="o">/</span><span class="n">v1</span>
+<span class="n">metadata</span><span class="p">:</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">website</span>
+</pre></div>
+</div>
+<p>If we want to actually deploy this to the cluster, we invoke the <code class="docutils literal notranslate"><span class="pre">deploy</span></code> script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">deploy</span> <span class="o">-</span><span class="n">a</span> <span class="n">website</span> <span class="o">-</span><span class="n">n</span> <span class="n">default</span> <span class="o">-</span><span class="n">c</span> <span class="n">dev</span> <span class="o">-</span><span class="n">u</span> <span class="n">cluster</span><span class="o">-</span><span class="n">user</span>
+</pre></div>
+</div>
+<p>The input parameters tell the deploy script to build and deploy the app “website” to the namespace “default” on the development cluster with authentication for user “cluster-user”. Let’s follow the logic of the <code class="docutils literal notranslate"><span class="pre">deploy</span></code> script to understand the hierarchical configuration scheme.</p>
+<p>First, the k8s access configuration file, or kubeconfig, for the target cluster is loaded for use by <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">KUBECONFIG</span><span class="o">=/</span><span class="n">private</span><span class="o">/</span><span class="n">infrastructure</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">dev</span><span class="o">/.</span><span class="n">kube</span><span class="o">/</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>Then the context is set for subsequent <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">config</span> <span class="n">use</span><span class="o">-</span><span class="n">context</span> <span class="n">cluster</span><span class="o">-</span><span class="n">user</span><span class="nd">@cluster</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>The next step is the hierarchical loading of the app configuration. The order follows this sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">defaults</span>
+<span class="mf">2.</span> <span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">cluster</span>
+<span class="mf">3.</span> <span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">namespace</span>
+<span class="mf">4.</span> <span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">config</span>
+<span class="mf">5.</span> <span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">cluster</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>The power of this hierarchy is evident when we dive into more detail in this example.</p>
+</div>
+<div class="section" id="development-workflow">
+<h2>Development workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The primary deployment workflow revolves around the <code class="docutils literal notranslate"><span class="pre">/scripts/deploy</span></code> script, deploying an updated app first on the dev cluster, and then after code review, on the production cluster.</p>
+<ol class="arabic simple">
+<li>A developer clones this repo (recursively to get the submodules), and then typically begins working on a particular app’s source code (typically a git submodule within <code class="docutils literal notranslate"><span class="pre">/apps/[app_name]/common/build/src</span></code>).</li>
+<li>To rapidly iterate the code, the developer frequently runs the deploy script to update the resources on the dev cluster in a development namespace such as <code class="docutils literal notranslate"><span class="pre">dev1</span></code>. The <code class="docutils literal notranslate"><span class="pre">deploy</span></code> script builds the templated k8s resource config files for the app using <code class="docutils literal notranslate"><span class="pre">ytt</span></code>, builds the updated Docker image if necessary using <code class="docutils literal notranslate"><span class="pre">kbld</span></code>, pushes the image to the image repository, and then updates the app resources using <code class="docutils literal notranslate"><span class="pre">kapp</span></code>.</li>
+<li>When the app update has been tested properly, it can be deployed on the production cluster by simply changing the target cluster in the <code class="docutils literal notranslate"><span class="pre">deploy</span></code> command.</li>
+</ol>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>The documentation is powered by Sphinx, using the reStructuredText (reST) format. With Sphinx installed locally, you can build the HTML files using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">docs</span><span class="o">/</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Then open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your browser.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, T. Andrew Manning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
