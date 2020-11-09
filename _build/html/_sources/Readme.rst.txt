@@ -6,6 +6,9 @@
 Kubernetes Deployment Framework
 ===========================================================
 
+.. warning::
+    This document is currently an incomplete draft.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
