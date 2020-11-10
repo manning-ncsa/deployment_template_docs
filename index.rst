@@ -50,10 +50,9 @@ The software utilities powering this framework are part of the Carvel suite (for
 
 These tools include ``ytt`` for configuration templating, ``kbld`` for image building and pushing, and ``kapp`` for creating and updating k8s resources defined together as an application. These tools assume ``kubectl`` is installed.
 
-Secrets
------------------------------------------------------------
+.. warning::
 
-Sensitive information, including Kubernetes Secret resources, should not be stored directly in this deployment repo, but should instead be stored in a separate, more secure repo that is cloned in the ``/private`` location. Resources defined in this private git submodule are symbolically linked where needed. 
+    Sensitive information, including Kubernetes Secret resources, should not be stored directly in this deployment repo, but should instead be stored in a separate, more secure repo that is cloned in the ``/private`` location. Resources defined in this private git submodule are symbolically linked where needed. 
 
 Infrastructure
 -----------------------------------------------------------

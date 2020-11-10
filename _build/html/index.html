@@ -94,7 +94,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Kubernetes Deployment Framework</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#carvel">Carvel Kubernetes Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#secrets">Secrets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#app-deployment">App Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development workflow</a></li>
@@ -178,7 +177,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Kubernetes Deployment Framework</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#carvel">Carvel Kubernetes Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#secrets">Secrets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#app-deployment">App Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development workflow</a></li>
@@ -214,10 +212,10 @@
 <blockquote>
 <div>Carvel provides a set of reliable, single-purpose, composable tools that aid in your application building, configuration, and deployment to Kubernetes.</div></blockquote>
 <p>These tools include <code class="docutils literal notranslate"><span class="pre">ytt</span></code> for configuration templating, <code class="docutils literal notranslate"><span class="pre">kbld</span></code> for image building and pushing, and <code class="docutils literal notranslate"><span class="pre">kapp</span></code> for creating and updating k8s resources defined together as an application. These tools assume <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> is installed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sensitive information, including Kubernetes Secret resources, should not be stored directly in this deployment repo, but should instead be stored in a separate, more secure repo that is cloned in the <code class="docutils literal notranslate"><span class="pre">/private</span></code> location. Resources defined in this private git submodule are symbolically linked where needed.</p>
 </div>
-<div class="section" id="secrets">
-<h2>Secrets<a class="headerlink" href="#secrets" title="Permalink to this headline">¶</a></h2>
-<p>Sensitive information, including Kubernetes Secret resources, should not be stored directly in this deployment repo, but should instead be stored in a separate, more secure repo that is cloned in the <code class="docutils literal notranslate"><span class="pre">/private</span></code> location. Resources defined in this private git submodule are symbolically linked where needed.</p>
 </div>
 <div class="section" id="infrastructure">
 <h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h2>
